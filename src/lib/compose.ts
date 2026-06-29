@@ -5,9 +5,9 @@ export interface SourceImage {
 }
 
 export interface ComposeOptions {
-  /** 统一目标高度（像素），所有截图按比例缩放到该高度 */
-  targetHeight: number
-  /** 图片之间的横向间距（像素，基于 targetHeight 坐标系） */
+  /** 背景（输出画布）高度（像素），图片会在高度上缩放到 bgHeight - 2*padY */
+  bgHeight: number
+  /** 图片之间的横向间距（像素） */
   gap: number
   /** 左右外边距 */
   padX: number
@@ -31,7 +31,7 @@ export interface Layout {
 }
 
 export const DEFAULT_OPTIONS: ComposeOptions = {
-  targetHeight: 1200,
+  bgHeight: 1296,
   gap: 48,
   padX: 48,
   padY: 48,
@@ -39,11 +39,14 @@ export const DEFAULT_OPTIONS: ComposeOptions = {
 }
 
 /**
- * 计算合成布局：所有图片统一到 targetHeight，并排居中放在透明画布上。
+ * 计算合成布局：背景高度为 bgHeight，图片在高度上缩放到 (bgHeight - 2*padY)
+ * （截图较矮时放大、较高时缩小），并排居中放在透明画布上。
  * 若设置了 minRatio 且内容不够宽，则左右补透明边距使画布达到最小横向比例。
  */
 export function computeLayout(images: SourceImage[], opts: ComposeOptions): Layout {
-  const H = opts.targetHeight
+  const canvasH = opts.bgHeight
+  // 图片高度填满背景高度减去上下边距，至少 1px
+  const H = Math.max(1, canvasH - 2 * opts.padY)
   const scaled = images.map((img) => {
     const ratio = img.bitmap.width / img.bitmap.height
     return { w: Math.round(H * ratio), h: H }
@@ -52,7 +55,6 @@ export function computeLayout(images: SourceImage[], opts: ComposeOptions): Layo
   const n = scaled.length
   const contentW = scaled.reduce((sum, s) => sum + s.w, 0) + Math.max(0, n - 1) * opts.gap
 
-  const canvasH = H + 2 * opts.padY
   let canvasW = contentW + 2 * opts.padX
 
   if (opts.minRatio != null) {

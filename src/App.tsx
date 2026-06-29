@@ -193,15 +193,18 @@ export default function App() {
           <div className="controls">
             <label className="field">
               <span>
-                目标高度 <em>{options.targetHeight}px</em>
+                背景高度 <em>{options.bgHeight}px</em>
+                <small className="hint">
+                  图片高度 {Math.max(1, options.bgHeight - 2 * options.padY)}px
+                </small>
               </span>
               <input
                 type="range"
                 min={400}
                 max={2400}
                 step={50}
-                value={options.targetHeight}
-                onChange={(e) => update('targetHeight', Number(e.target.value))}
+                value={options.bgHeight}
+                onChange={(e) => update('bgHeight', Number(e.target.value))}
               />
             </label>
 
