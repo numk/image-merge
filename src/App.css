@@ -160,6 +160,51 @@
   accent-color: var(--accent);
 }
 
+.group-title {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.check-field {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.check-field input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.color-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.color-row input[type='color'] {
+  width: 44px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-2);
+  cursor: pointer;
+}
+
+.color-pair {
+  display: flex;
+  gap: 8px;
+}
+
 .ratio-group {
   display: flex;
   gap: 8px;
