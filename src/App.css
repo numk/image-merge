@@ -1,5 +1,5 @@
 .app {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 32px 24px 64px;
 }
@@ -19,12 +19,12 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(480px, 640px) 1fr;
   gap: 24px;
   align-items: start;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1080px) {
   .layout {
     grid-template-columns: 1fr;
   }
@@ -128,8 +128,20 @@
 }
 
 /* Controls */
-.controls {
+.controls-grid {
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+
+@media (max-width: 600px) {
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.controls-col {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -163,11 +175,18 @@
 .group-title {
   margin-top: 6px;
   padding-top: 14px;
+  padding-bottom: 2px;
   border-top: 1px solid var(--border);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--text-dim);
+}
+
+.group-title.first {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
 }
 
 .check-field {

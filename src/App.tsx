@@ -197,206 +197,212 @@ export default function App() {
             </ul>
           )}
 
-          <div className="controls">
-            <label className="field">
-              <span>
-                背景高度 <em>{options.bgHeight}px</em>
-                <small className="hint">
-                  图片高度 {Math.max(1, options.bgHeight - 2 * options.padY)}px
-                </small>
-              </span>
-              <input
-                type="range"
-                min={400}
-                max={2400}
-                step={50}
-                value={options.bgHeight}
-                onChange={(e) => update('bgHeight', Number(e.target.value))}
-              />
-            </label>
+          <div className="controls-grid">
+            <div className="controls-col">
+              <div className="group-title first">布局</div>
 
-            <label className="field">
-              <span>
-                图片间距 <em>{options.gap}px</em>
-              </span>
-              <input
-                type="range"
-                min={0}
-                max={200}
-                step={4}
-                value={options.gap}
-                onChange={(e) => update('gap', Number(e.target.value))}
-              />
-            </label>
-
-            <label className="field">
-              <span>
-                左右边距 <em>{options.padX}px</em>
-              </span>
-              <input
-                type="range"
-                min={0}
-                max={300}
-                step={4}
-                value={options.padX}
-                onChange={(e) => update('padX', Number(e.target.value))}
-              />
-            </label>
-
-            <label className="field">
-              <span>
-                上下边距 <em>{options.padY}px</em>
-              </span>
-              <input
-                type="range"
-                min={0}
-                max={300}
-                step={4}
-                value={options.padY}
-                onChange={(e) => update('padY', Number(e.target.value))}
-              />
-            </label>
-
-            <div className="field">
-              <span>
-                最小横向比例 <em>{ratioValue}</em>
-              </span>
-              <div className="ratio-group">
-                {RATIO_PRESETS.map((p) => (
-                  <button
-                    key={p.label}
-                    className={options.minRatio === p.value ? 'active' : ''}
-                    onClick={() => update('minRatio', p.value)}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="group-title">美化</div>
-
-            <label className="field">
-              <span>
-                截图圆角 <em>{options.radius}px</em>
-              </span>
-              <input
-                type="range"
-                min={0}
-                max={120}
-                step={2}
-                value={options.radius}
-                onChange={(e) => update('radius', Number(e.target.value))}
-              />
-            </label>
-
-            <label className="field check-field">
-              <input
-                type="checkbox"
-                checked={options.shadow}
-                onChange={(e) => update('shadow', e.target.checked)}
-              />
-              <span>启用阴影</span>
-            </label>
-
-            {options.shadow && (
-              <>
-                <label className="field">
-                  <span>
-                    阴影模糊 <em>{options.shadowBlur}px</em>
-                    {options.shadowBlur > options.padX ||
-                    options.shadowBlur > options.padY ? (
-                      <small className="hint">阴影可能被边距裁切，建议调大边距</small>
-                    ) : null}
-                  </span>
-                  <input
-                    type="range"
-                    min={0}
-                    max={120}
-                    step={2}
-                    value={options.shadowBlur}
-                    onChange={(e) => update('shadowBlur', Number(e.target.value))}
-                  />
-                </label>
-
-                <label className="field">
-                  <span>
-                    阴影浓度 <em>{Math.round(options.shadowOpacity * 100)}%</em>
-                  </span>
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    step={5}
-                    value={Math.round(options.shadowOpacity * 100)}
-                    onChange={(e) =>
-                      update('shadowOpacity', Number(e.target.value) / 100)
-                    }
-                  />
-                </label>
-              </>
-            )}
-
-            <div className="field">
-              <span>背景</span>
-              <div className="ratio-group">
-                {BG_PRESETS.map((p) => (
-                  <button
-                    key={p.value}
-                    className={options.bgType === p.value ? 'active' : ''}
-                    onClick={() => update('bgType', p.value)}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {options.bgType === 'solid' && (
-              <label className="field color-row">
-                <span>背景颜色</span>
+              <label className="field">
+                <span>
+                  背景高度 <em>{options.bgHeight}px</em>
+                  <small className="hint">
+                    图片高度 {Math.max(1, options.bgHeight - 2 * options.padY)}px
+                  </small>
+                </span>
                 <input
-                  type="color"
-                  value={options.bgColor}
-                  onChange={(e) => update('bgColor', e.target.value)}
+                  type="range"
+                  min={400}
+                  max={2400}
+                  step={50}
+                  value={options.bgHeight}
+                  onChange={(e) => update('bgHeight', Number(e.target.value))}
                 />
               </label>
-            )}
 
-            {options.bgType === 'gradient' && (
-              <>
-                <div className="field color-row">
-                  <span>渐变颜色</span>
-                  <div className="color-pair">
-                    <input
-                      type="color"
-                      value={options.bgColor}
-                      onChange={(e) => update('bgColor', e.target.value)}
-                    />
-                    <input
-                      type="color"
-                      value={options.bgColor2}
-                      onChange={(e) => update('bgColor2', e.target.value)}
-                    />
-                  </div>
+              <label className="field">
+                <span>
+                  图片间距 <em>{options.gap}px</em>
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={200}
+                  step={4}
+                  value={options.gap}
+                  onChange={(e) => update('gap', Number(e.target.value))}
+                />
+              </label>
+
+              <label className="field">
+                <span>
+                  左右边距 <em>{options.padX}px</em>
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={300}
+                  step={4}
+                  value={options.padX}
+                  onChange={(e) => update('padX', Number(e.target.value))}
+                />
+              </label>
+
+              <label className="field">
+                <span>
+                  上下边距 <em>{options.padY}px</em>
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={300}
+                  step={4}
+                  value={options.padY}
+                  onChange={(e) => update('padY', Number(e.target.value))}
+                />
+              </label>
+
+              <div className="field">
+                <span>
+                  最小横向比例 <em>{ratioValue}</em>
+                </span>
+                <div className="ratio-group">
+                  {RATIO_PRESETS.map((p) => (
+                    <button
+                      key={p.label}
+                      className={options.minRatio === p.value ? 'active' : ''}
+                      onClick={() => update('minRatio', p.value)}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
                 </div>
-                <label className="field">
-                  <span>
-                    渐变角度 <em>{options.gradientAngle}°</em>
-                  </span>
+              </div>
+            </div>
+
+            <div className="controls-col">
+              <div className="group-title first">美化</div>
+
+              <label className="field">
+                <span>
+                  截图圆角 <em>{options.radius}px</em>
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={120}
+                  step={2}
+                  value={options.radius}
+                  onChange={(e) => update('radius', Number(e.target.value))}
+                />
+              </label>
+
+              <label className="field check-field">
+                <input
+                  type="checkbox"
+                  checked={options.shadow}
+                  onChange={(e) => update('shadow', e.target.checked)}
+                />
+                <span>启用阴影</span>
+              </label>
+
+              {options.shadow && (
+                <>
+                  <label className="field">
+                    <span>
+                      阴影模糊 <em>{options.shadowBlur}px</em>
+                      {options.shadowBlur > options.padX ||
+                      options.shadowBlur > options.padY ? (
+                        <small className="hint">建议调大边距</small>
+                      ) : null}
+                    </span>
+                    <input
+                      type="range"
+                      min={0}
+                      max={120}
+                      step={2}
+                      value={options.shadowBlur}
+                      onChange={(e) => update('shadowBlur', Number(e.target.value))}
+                    />
+                  </label>
+
+                  <label className="field">
+                    <span>
+                      阴影浓度 <em>{Math.round(options.shadowOpacity * 100)}%</em>
+                    </span>
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      step={5}
+                      value={Math.round(options.shadowOpacity * 100)}
+                      onChange={(e) =>
+                        update('shadowOpacity', Number(e.target.value) / 100)
+                      }
+                    />
+                  </label>
+                </>
+              )}
+
+              <div className="field">
+                <span>背景</span>
+                <div className="ratio-group">
+                  {BG_PRESETS.map((p) => (
+                    <button
+                      key={p.value}
+                      className={options.bgType === p.value ? 'active' : ''}
+                      onClick={() => update('bgType', p.value)}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {options.bgType === 'solid' && (
+                <label className="field color-row">
+                  <span>背景颜色</span>
                   <input
-                    type="range"
-                    min={0}
-                    max={360}
-                    step={15}
-                    value={options.gradientAngle}
-                    onChange={(e) =>
-                      update('gradientAngle', Number(e.target.value))
-                    }
+                    type="color"
+                    value={options.bgColor}
+                    onChange={(e) => update('bgColor', e.target.value)}
                   />
                 </label>
-              </>
-            )}
+              )}
+
+              {options.bgType === 'gradient' && (
+                <>
+                  <div className="field color-row">
+                    <span>渐变颜色</span>
+                    <div className="color-pair">
+                      <input
+                        type="color"
+                        value={options.bgColor}
+                        onChange={(e) => update('bgColor', e.target.value)}
+                      />
+                      <input
+                        type="color"
+                        value={options.bgColor2}
+                        onChange={(e) => update('bgColor2', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <label className="field">
+                    <span>
+                      渐变角度 <em>{options.gradientAngle}°</em>
+                    </span>
+                    <input
+                      type="range"
+                      min={0}
+                      max={360}
+                      step={15}
+                      value={options.gradientAngle}
+                      onChange={(e) =>
+                        update('gradientAngle', Number(e.target.value))
+                      }
+                    />
+                  </label>
+                </>
+              )}
+            </div>
           </div>
 
           <div className="actions">
